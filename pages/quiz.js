@@ -31,7 +31,7 @@ function ResultWidget({ results }) {
         </p>
         <ul>
           {results.map((result, index) => (
-            <li>
+            <li key={`result__${result}`}>
               #
               {index + 1}
               {' '}
@@ -40,7 +40,6 @@ function ResultWidget({ results }) {
               {result === true ? 'Acertou' : 'Errou'}
             </li>
           ))}
-
         </ul>
       </Widget.Content>
     </Widget>
@@ -69,7 +68,7 @@ function QuestionWidget({
   addResult,
 }) {
   const [selectedAlternative, setSelectedAlternative] = React.useState(undefined);
-  const [isQuestionSubmitted, setIsQuestionSubmitted] = React.useState();
+  const [isQuestionSubmitted, setIsQuestionSubmitted] = React.useState(false);
   const questionId = `question__${questionIndex}`;
   const isCorrect = selectedAlternative === question.answer;
   const hasAlternativeSelected = selectedAlternative !== undefined;
@@ -124,7 +123,6 @@ function QuestionWidget({
                 htmlFor={alternativeId}
                 data-selected={isSelected}
                 data-status={isQuestionSubmitted && alternativeStatus}
-
               >
                 <input
                   style={{ display: 'none' }}
